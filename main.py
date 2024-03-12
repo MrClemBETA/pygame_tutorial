@@ -13,7 +13,17 @@ from pygame.locals import (
     K_UP, K_DOWN, K_LEFT, K_RIGHT, K_ESCAPE, KEYDOWN, QUIT    
 )
 
+# Initialize pygame
 pygame.init()
+
+# Setup for sounds, defaults are good
+pygame.mixer.init()
+
+# Load and play background music
+# Sound source: http://ccmixter.org/files/Apoxode/59262
+# License: https://creativecommons.org/licenses/by/3.0/
+pygame.mixer.music.load("Apoxode_-_Electric_1.mp3")
+pygame.mixer.music.play(loops=-1)
 
 # Set up the drawing window
 screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
@@ -99,4 +109,16 @@ while running:
     clock.tick(30)
     
 # Done! Time to quit.
+pygame.mixer.music.stop()
+pygame.mixer.quit()
 pygame.quit()
+
+
+
+
+
+
+
+
+
+
