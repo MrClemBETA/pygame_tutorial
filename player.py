@@ -2,6 +2,11 @@ import pygame
 from utility import SCREEN_WIDTH, SCREEN_HEIGHT
 from pygame.locals import (RLEACCEL, K_UP, K_DOWN, K_LEFT, K_RIGHT)
 
+pygame.mixer.init()
+move_up_sound = pygame.mixer.Sound("Rising_putter.ogg")
+move_down_sound = pygame.mixer.Sound("Falling_putter.ogg")
+collision_sound = pygame.mixer.Sound("Collision.ogg")
+
 # Define a Player object by extending pygame.sprite.Sprite
 # The surface drawn on the screen is now an attribute of 'player'
 class Player(pygame.sprite.Sprite):
@@ -16,8 +21,10 @@ class Player(pygame.sprite.Sprite):
     def update(self, pressed_keys):
         if pressed_keys[K_UP]:
             self.rect.move_ip(0, -5)
+            move_up_sound.play()
         if pressed_keys[K_DOWN]:
             self.rect.move_ip(0, 5)
+            move_down_sound.play()
         if pressed_keys[K_LEFT]:
             self.rect.move_ip(-5, 0)
         if pressed_keys[K_RIGHT]:
@@ -31,3 +38,18 @@ class Player(pygame.sprite.Sprite):
             self.rect.top = 0
         if self.rect.bottom >= SCREEN_HEIGHT:
             self.rect.bottom = SCREEN_HEIGHT
+
+    def kill(self):
+        collision_sound.play()
+        super().kill()
+
+
+
+
+
+
+
+
+
+
+            
