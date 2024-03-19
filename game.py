@@ -1,4 +1,6 @@
-
+import pygame
+from level import Level
+from utility import SCREEN_WIDTH, SCREEN_HEIGHT
 
 # Import pygame.locals for easier access to key coordinates
 # Updated to conform to flake8 and black standards
@@ -21,6 +23,9 @@ class Game:
         # Create the clock for the frame rate
         self.clock = pygame.time.Clock()
 
+        # Create the scene, temporarily it is Level
+        self.scene = Level(self.screen)
+
         # Run until the user asks to quit
         self.running = True
         while self.running:
@@ -39,9 +44,16 @@ class Game:
             
             if event.type == QUIT:
                 self.running = False
+
+            # Execute the scene's event checker
+            self.scene.check_event(event)
                 
         # Get the set of keys pressed and check for user input
         pressed_keys = pygame.key.get_pressed()
+
+        # Execute the scene's update function
+        if self.scene.update(pressed_keys) == False:
+            self.running = False
 
         # Flip the display
         pygame.display.flip()

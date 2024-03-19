@@ -10,7 +10,7 @@ collision_sound = pygame.mixer.Sound("Collision.ogg")
 # Define a Player object by extending pygame.sprite.Sprite
 # The surface drawn on the screen is now an attribute of 'player'
 class Player(pygame.sprite.Sprite):
-    def __init__(self, position):
+    def __init__(self):
         super(Player, self).__init__()
         self.surf = pygame.image.load("jet.png").convert()
         self.surf.set_colorkey((255, 255, 255), RLEACCEL)
