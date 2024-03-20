@@ -1,6 +1,6 @@
 import pygame
 from level import Level
-from utility import SCREEN_WIDTH, SCREEN_HEIGHT
+from intro import Intro
 
 # Import pygame.locals for easier access to key coordinates
 # Updated to conform to flake8 and black standards
@@ -17,14 +17,11 @@ class Game:
         pygame.mixer.music.load("Apoxode_-_Electric_1.mp3")
         pygame.mixer.music.play(loops=-1)
 
-        # Set up the drawing window
-        self.screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
-
         # Create the clock for the frame rate
         self.clock = pygame.time.Clock()
 
         # Create the scene, temporarily it is Level
-        self.scene = Level(self.screen)
+        self.scene = Intro()
 
         # Run until the user asks to quit
         self.running = True
@@ -46,7 +43,8 @@ class Game:
                 self.running = False
 
             # Execute the scene's event checker
-            self.scene.check_event(event)
+            if self.scene.check_event(event) == "level":
+                self.scene = Level()
                 
         # Get the set of keys pressed and check for user input
         pressed_keys = pygame.key.get_pressed()

@@ -9,8 +9,8 @@ ADDCLOUD = pygame.USEREVENT + 2
 
 class Level(Scene):
 
-    def __init__(self, screen):
-        super().__init__(screen)
+    def __init__(self):
+        super().__init__()
 
         # Create a custom event for adding a new enemy and cloud
         pygame.time.set_timer(ADDENEMY, 250)
@@ -29,7 +29,7 @@ class Level(Scene):
         self.all_sprites.add(self.player)
 
     def update(self, pressed_keys):
-        super().update()
+        super().update(pressed_keys)
 
         # Update the player sprite based on keypresses
         self.player.update(pressed_keys)
@@ -41,11 +41,11 @@ class Level(Scene):
         self.clouds.update()
 
         # Fill the background with sky blue
-        self.screen.fill((135, 206, 250))
+        Scene.screen.fill((135, 206, 250))
         
         # Draw all sprites
         for entity in self.all_sprites:
-            self.screen.blit(entity.surf, entity.rect)
+            Scene.screen.blit(entity.surf, entity.rect)
 
         # Detect Collisions
         if pygame.sprite.spritecollideany(self.player, self.enemies):

@@ -1,9 +1,16 @@
-
+import pygame
+from utility import SCREEN_WIDTH, SCREEN_HEIGHT
 
 class Scene:
 
-    def __init__(self, screen):
-        self.screen = screen
+    # Set up the drawing window
+    screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
 
-    def update(self):
+    def __init__(self):
+        pass
+
+    def update(self, pressed_keys):
+        pass
+
+    def check_event(self, event):
         pass
