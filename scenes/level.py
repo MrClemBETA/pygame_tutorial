@@ -1,11 +1,5 @@
-import pygame
-from scene import Scene
-from player import Player
-from enemy import Enemy
-from cloud import Cloud
-
-ADDENEMY = pygame.USEREVENT + 1
-ADDCLOUD = pygame.USEREVENT + 2
+import pygame, utility, sprites
+from .scene import Scene
 
 class Level(Scene):
 
@@ -13,11 +7,11 @@ class Level(Scene):
         super().__init__()
 
         # Create a custom event for adding a new enemy and cloud
-        pygame.time.set_timer(ADDENEMY, 250)
-        pygame.time.set_timer(ADDCLOUD, 1000)
+        pygame.time.set_timer(utility.ADDENEMY, 250)
+        pygame.time.set_timer(utility.ADDCLOUD, 1000)
 
         # Create the player
-        self.player = Player()
+        self.player = sprites.Player()
 
         # Create groups to hold enemy sprites and all sprites
         # - enemies is used for collision detection and position updates
@@ -55,16 +49,16 @@ class Level(Scene):
 
     def check_event(self, event):
         # Add a new enemy?
-        if event.type == ADDENEMY:
+        if event.type == utility.ADDENEMY:
             # Create the new enemy and add it to the sprite groups
-            new_enemy = Enemy()
+            new_enemy = sprites.Enemy()
             self.enemies.add(new_enemy)
             self.all_sprites.add(new_enemy)
 
         # Add a new cloud?
-        if event.type == ADDCLOUD:
+        if event.type == utility.ADDCLOUD:
             # Create the new cloud and add it to the sprite groups
-            new_cloud = Cloud()
+            new_cloud = sprites.Cloud()
             self.clouds.add(new_cloud)
             self.all_sprites.add(new_cloud)
 

@@ -1,6 +1,4 @@
-import pygame
-from level import Level
-from intro import Intro
+import pygame, utility, scenes
 
 # Import pygame.locals for easier access to key coordinates
 # Updated to conform to flake8 and black standards
@@ -21,7 +19,7 @@ class Game:
         self.clock = pygame.time.Clock()
 
         # Create the scene, temporarily it is Level
-        self.scene = Intro()
+        self.scene = scenes.Intro()
 
         # Run until the user asks to quit
         self.running = True
@@ -42,9 +40,12 @@ class Game:
             if event.type == QUIT:
                 self.running = False
 
+            if event.type == utility.LEVELSCENE:
+                self.scene = scenes.Level()
+                return
+
             # Execute the scene's event checker
-            if self.scene.check_event(event) == "level":
-                self.scene = Level()
+            self.scene.check_event(event)
                 
         # Get the set of keys pressed and check for user input
         pressed_keys = pygame.key.get_pressed()
