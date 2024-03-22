@@ -12,7 +12,7 @@ class Game:
         # Load and play background music
         # Sound source: http://ccmixter.org/files/Apoxode/59262
         # License: https://creativecommons.org/licenses/by/3.0/
-        pygame.mixer.music.load("Apoxode_-_Electric_1.mp3")
+        pygame.mixer.music.load("sounds/Apoxode_-_Electric_1.mp3")
         pygame.mixer.music.play(loops=-1)
 
         # Create the clock for the frame rate
@@ -44,6 +44,14 @@ class Game:
                 self.scene = scenes.Level()
                 return
 
+            if event.type == utility.OUTROSCENE:
+                self.scene = scenes.Outro()
+                return
+
+            if event.type == utility.INTROSCENE:
+                self.scene = scenes.Intro()
+                return
+
             # Execute the scene's event checker
             self.scene.check_event(event)
                 
@@ -51,8 +59,7 @@ class Game:
         pressed_keys = pygame.key.get_pressed()
 
         # Execute the scene's update function
-        if self.scene.update(pressed_keys) == False:
-            self.running = False
+        self.scene.update(pressed_keys)
 
         # Flip the display
         pygame.display.flip()

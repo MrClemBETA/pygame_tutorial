@@ -3,16 +3,16 @@ from utility import SCREEN_WIDTH, SCREEN_HEIGHT
 from pygame.locals import (RLEACCEL, K_UP, K_DOWN, K_LEFT, K_RIGHT)
 
 pygame.mixer.init()
-move_up_sound = pygame.mixer.Sound("Rising_putter.ogg")
-move_down_sound = pygame.mixer.Sound("Falling_putter.ogg")
-collision_sound = pygame.mixer.Sound("Collision.ogg")
+move_up_sound = pygame.mixer.Sound("sounds/Rising_putter.ogg")
+move_down_sound = pygame.mixer.Sound("sounds/Falling_putter.ogg")
+collision_sound = pygame.mixer.Sound("sounds/Collision.ogg")
 
 # Define a Player object by extending pygame.sprite.Sprite
 # The surface drawn on the screen is now an attribute of 'player'
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super(Player, self).__init__()
-        self.surf = pygame.image.load("jet.png").convert()
+        self.surf = pygame.image.load("imgs/jet.png").convert()
         self.surf.set_colorkey((255, 255, 255), RLEACCEL)
         self.rect = self.surf.get_rect(
             center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT/2)

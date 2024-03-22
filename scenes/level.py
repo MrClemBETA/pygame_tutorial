@@ -44,7 +44,7 @@ class Level(Scene):
         # Detect Collisions
         if pygame.sprite.spritecollideany(self.player, self.enemies):
             self.player.kill()
-            return False
+            pygame.event.post(pygame.event.Event(utility.OUTROSCENE))
 
 
     def check_event(self, event):
