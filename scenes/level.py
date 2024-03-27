@@ -35,7 +35,7 @@ class Level(Scene):
         self.clouds.update()
 
         # Fill the background with sky blue
-        Scene.screen.fill((135, 206, 250))
+        Scene.screen.fill(utility.SKY_BLUE)
         
         # Draw all sprites
         for entity in self.all_sprites:
